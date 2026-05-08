@@ -7,20 +7,15 @@ dotenv.config();
 const bot = new Bot(process.env.BOT_TOKEN);
 
 async function searchChannels(query) {
-  const token = process.env.TGSTAT_TOKEN;
-
-  const url =
-    `https://api.tgstat.ru/channels/search?` +
-    `token=${token}&q=${encodeURIComponent(query)}&limit=5`;
-
-  const res = await fetch(url);
-  const data = await res.json();
-
-  if (!data.response?.items) {
-    return [];
-  }
-
-  return data.response.items;
+  return [
+    {
+      title: `${query} AI 社区`,
+      username: "ai",
+      participants_count: 10000,
+      about: `这是关于 ${query} 的 Telegram 频道`,
+      link: "t.me/ai"
+    }
+  ];
 }
 
 async function loading(ctx) {
